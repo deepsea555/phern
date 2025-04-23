@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ເພີນ - Personal Website</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling effect */
+        }
+        
+        body {
+            font-family: phetsarath ot;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background bubbles */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: rise 15s infinite ease-in;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 8s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 35%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            animation-duration: 11s;
+            animation-delay: 0s;
+        }
+        
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 55%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 65%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+        
+        .bubble:nth-child(7) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(8) {
+            width: 25px;
+            height: 25px;
+            left: 80%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(9) {
+            width: 15px;
+            height: 15px;
+            left: 90%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(10) {
+            width: 90px;
+            height: 90px;
+            left: 25%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translate(100px, -500px);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
+            }
+        }
+        
+        .header-content {
+            z-index: 1;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .header-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .header-content p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll down indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-down::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+            transform: rotate(45deg);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(110, 142, 251, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* About section */
+        .about {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(110, 142, 251, 0.03) 0%, rgba(167, 119, 227, 0.03) 90%);
+            z-index: 0;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100%;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-play-state: paused;
+        }
+        
+        .about-image.visible {
+            animation-play-state: running;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s;
+            animation-play-state: paused;
+        }
+        
+        .about-text.visible {
+            animation-play-state: running;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #6e8efb;
+            position: relative;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid #a777e3;
+            transition: all 0.3s ease;
+        }
+        
+        .about-text p:hover {
+            border-left-width: 6px;
+            padding-left: 25px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Skills section */
+        .skills {
+            padding: 100px 0;
+            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skills::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(110, 142, 251, 0.1), rgba(167, 119, 227, 0.1));
+            z-index: 0;
+        }
+        
+        .skills::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(167, 119, 227, 0.1), rgba(110, 142, 251, 0.1));
+            z-index: 0;
+        }
+        
+        .skills h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #6e8efb;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .skill-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            width: 300px;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-play-state: paused;
+        }
+        
+        .skill-card.visible {
+            animation-play-state: running;
+        }
+        
+        .skill-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .skill-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(110, 142, 251, 0.2);
+        }
+        
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .skill-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            transition: width 0.3s ease;
+        }
+        
+        .skill-card:hover h3::after {
+            width: 80%;
+        }
+        
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover .skill-icon {
+            transform: rotateY(180deg);
+        }
+        
+        /* Contact section */
+        .contact {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236e8efb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #6e8efb;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-item {
+            width: 250px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-play-state: paused;
+        }
+        
+        .contact-item.visible {
+            animation-play-state: running;
+        }
+        
+        .contact-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .contact-item:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(110, 142, 251, 0.2);
+        }
+        
+        .contact-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-item h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            transition: width 0.3s ease;
+        }
+        
+        .contact-item:hover h3::after {
+            width: 80%;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: white;
+            color: #6e8efb;
+            transform: translateY(-5px);
+        }
+        
+        .footer-nav {
+            margin-bottom: 30px;
+        }
+        
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-nav a:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 3rem;
+            }
+            
+            .header-content p {
+                font-size: 1.2rem;
+            }
+            
+            .about-content, .contact-info {
+                flex-direction: column;
+            }
+            
+            .about-image, .about-text {
+                width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Animation trigger class for scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="#" class="logo">ເພີນ</a>
+            <ul class="nav-links">
+                <li><a href="#about">ກ່ຽວກັບຂ້ອຍ</a></li>
+                <li><a href="#skills">ທັກສະ</a></li>
+                <li><a href="#contact">ຕິດຕໍ່</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header id="home">
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        <div class="header-content">
+            <h1>ເພີນ</h1>
+            <p>ຍິນດີຕ້ອນຮັບສູ່ເວັບໄຊຂອງຂ້ອຍ</p>
+        </div>
+        <div class="scroll-down"></div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image animate-on-scroll">
+                    <img src="" alt="ເພີນ">
+                </div>
+                <div class="about-text animate-on-scroll">
+                    <h2 class="section-title">ກ່ຽວກັບຂ້ອຍ</h2>
+                    <p>ສະບາຍດີ! ຂ້ອຍຊື່ ເພີນ. ຂ້ອຍເປັນຄົນທີ່ມັກການພັດທະນາຕົນເອງ ແລະ ຮຽນຮູ້ສິ່ງໃໝ່ໆຢູ່ສະເໝີ.</p>
+                    <p>ຂ້ອຍມີຄວາມຫຼົງໄຫຼໃນການສ້າງສັນ ແລະ ມີຄວາມມຸ່ງໝັ້ນໃນການເຮັດວຽກ. ຂ້ອຍເຊື່ອວ່າການເຮັດວຽກໜັກ ແລະ ຄວາມຕັ້ງໃຈຈະນຳໄປສູ່ຄວາມສຳເລັດ.</p>
+                    <p>ຂ້ອຍມີຄວາມສົນໃຈໃນຫຼາຍໆດ້ານ ແລະ ພ້ອມທີ່ຈະຮ່ວມມືກັບທຸກຄົນເພື່ອສ້າງຜົນງານທີ່ດີ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">ທັກສະ ແລະ ຄວາມສາມາດ</h2>
+            <div class="skills-container">
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">1</div>
+                    <h3>ທັກສະທີ 1</h3>
+                    <p>ອະທິບາຍກ່ຽວກັບທັກສະ ແລະ ຄວາມສາມາດຂອງທ່ານໃນດ້ານນີ້.</p>
+                </div>
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">2</div>
+                    <h3>ທັກສະທີ 2</h3>
+                    <p>ອະທິບາຍກ່ຽວກັບທັກສະ ແລະ ຄວາມສາມາດຂອງທ່ານໃນດ້ານນີ້.</p>
+                </div>
+                <div class="skill-card animate-on-scroll">
+                    <div class="skill-icon">3</div>
+                    <h3>ທັກສະທີ 3</h3>
+                    <p>ອະທິບາຍກ່ຽວກັບທັກສະ ແລະ ຄວາມສາມາດຂອງທ່ານໃນດ້ານນີ້.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">ຕິດຕໍ່</h2>
+            <div class="contact-info">
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">@</div>
+                    <h3>ອີເມວ</h3>
+                    <p>youremail@example.com</p>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">☎</div>
+                    <h3>ເບີໂທລະສັບ</h3>
+                    <p>+XXX XXX XXXX</p>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">📍</div>
+                    <h3>ທີ່ຢູ່</h3>
+                    <p>ວຽງຈັນ, ລາວ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">FB</a>
+                <a href="#" class="social-link">IG</a>
+                <a href="#" class="social-link">TW</a>
+                <a href="#" class="social-link">LI</a>
+            </div>
+            <div class="footer-nav">
+                <a href="#home">ໜ້າຫຼັກ</a>
+                <a href="#about">ກ່ຽວກັບຂ້ອຍ</a>
+                <a href="#skills">ທັກສະ</a>
+                <a href="#contact">ຕິດຕໍ່</a>
+            </div>
+            <p class="copyright">&copy; 2025 ເພີນ. ສະຫງວນລິຂະສິດທັງໝົດ.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#home" class="back-to-top">↑</a>
+
+    <!-- Simple animation script without using external libraries -->
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show elements that are in viewport on load
+            showElementsInViewport();
+            
+            // Show elements when scrolled into viewport
+            window.addEventListener('scroll', function() {
+                showElementsInViewport();
+                toggleBackToTopButton();
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Function to show elements when they enter the viewport
+        function showElementsInViewport() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Function to toggle back to top button
+        function toggleBackToTopButton() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            if (window.scrollY > 500) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+    </script>
+</body>
+</html>
